@@ -3,11 +3,12 @@
         <url>http://bioviz.org/galaxy.html?version=${bigwig_file.dbkey}&amp;loadresidues=false&amp;feature_url_0=${bigwig_file.url}&amp;sym_name_0=${niceName}&amp;sym_method_0=${bigwig_file.url}&amp;query_url=${bigwig_file.url}&amp;server_url=galaxy</url>
         <param type="data" name="bigwig_file_for_name" viewable="False"/>
         <param type="template" name="niceName" viewable="False" strip="True">
-            #import re
+            #import urllib
             #set nm=$bigwig_file_for_name.name
-            ${re.sub('\W',"_",nm)}
+            ${urllib.quote(nm)}
+            ${nm}
         </param>
-        <param type="data" name="bigwig_file" url="${niceName}.bigwig" />
+        <param type="data" name="bigwig_file" url="${niceName}" />
         <!--<param type="template" name="position" strip="True" >
             #set chrom, start, end = $bigwig_file.datatype.get_estimated_display_viewport( $bigwig_file )
             #if $chrom is not None:

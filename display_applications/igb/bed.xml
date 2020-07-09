@@ -3,11 +3,12 @@
         <url>$bioviz</url>
         <param type="data" name="bed_file_for_name" viewable="False"/>
         <param type="template" name="niceName" viewable="False" strip="True">
-            #import re
+            #import urllib
             #set nm=$bed_file_for_name.name
-            ${re.sub('\W',"_",nm)}
+            ${urllib.quote(nm)}
+            ${nm}
         </param>
-        <param type="data" name="bed_file" url="${niceName}.bed" />
+        <param type="data" name="bed_file" url="${niceName}" />
         <param type="template" name="bioviz" strip="True" >
             http://bioviz.org/galaxy.html?version=${bed_file.dbkey}&amp;loadresidues=false&amp;feature_url_0=${bed_file.url}&amp;sym_name_0=${niceName}&amp;sym_method_0=${bed_file.url}&amp;query_url=${bed_file.url}&amp;server_url=galaxy
         </param>
