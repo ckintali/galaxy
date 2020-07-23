@@ -3,11 +3,12 @@
         <url>http://bioviz.org/galaxy.html?version=${bam_file.dbkey}&amp;feature_url_0=${bam_file.url}&amp;sym_name_0=${niceName}&amp;sym_method_0=${bam_file.url}&amp;query_url=${bam_file.url}&amp;server_url=galaxy</url>
         <param type="data" name="bam_file_for_name" viewable="False"/>
         <param type="template" name="niceName" viewable="False" strip="True">
-            #import re
+            #import urllib.parse
             #set nm=$bam_file_for_name.name
-            ${re.sub('\W',"_",nm)}
+            #{urllib.parse.quote(nm)}
+            ${nm}
         </param>
-        <param type="data" name="bai_file" url="${niceName}.bam.bai" metadata="bam_index" />
-        <param type="data" name="bam_file" url="${niceName}.bam" />
+        <param type="data" name="bai_file" url="${niceName}.bai" metadata="bam_index" />
+        <param type="data" name="bam_file" url="${niceName}" />
     </link>
 </display>
